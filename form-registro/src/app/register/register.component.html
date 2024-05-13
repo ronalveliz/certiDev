@@ -6,16 +6,17 @@
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="nombreCompleto"  placeholder="nombreCompleto" formControlName="nombreCompleto">
             <label for="nombreCompleto">nombreCompleto</label>
-            @if (registerForm.controls.nombreCompleto.touched && registerForm.controls.nombreCompleto.errors) {
+          <!--  @if (registerForm.controls.nombreCompleto.touched && registerForm.controls.nombreCompleto.errors) {
               <div>
                 <small class="text-danger"> el nombre Debe tener al menos 5 caracteres</small>
               </div>
-            }
+            }-->
+            <small *ngIf="registerForm.controls.nombreCompleto.touched && registerForm.controls.nombreCompleto.errors" class="text-danger"> el nombre Debe tener al menos 5 caracteres</small>
           </div>
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="correo" placeholder="name@example.com" formControlName="correo">
             <label for="correo">correo</label>
-            @if (
+            <!--@if (
               registerForm.controls.correo.touched && registerForm.controls.correo.errors) {
                 <div>
                   @if (registerForm.controls.correo.errors['required']) {
@@ -25,7 +26,9 @@
                     <small class="text-danger">El formato del email introducido es incorrecto.</small>
                   }
                 </div>
-              }
+              }-->
+              <small *ngIf=" registerForm.controls.correo.touched && registerForm.controls.correo.errors?.required"  class="text-danger">Email es obligatorio.</small>
+              <small *ngIf="registerForm.controls.correo.touched && registerForm.controls.correo.errors?.email" class="text-danger">El formato del email introducido es incorrecto.</small>
           </div>
           <div class="form-floating mb-3">
             <input type="password" class="form-control" id="password"  placeholder="password" formControlName="password">
@@ -34,7 +37,7 @@
           <div class="form-floating mb-3">
             <input type="password" class="form-control" id="contraConfirmada"  placeholder="password" formControlName="contraConfirmada">
             <label for="contraConfirmada">password</label>
-            @if (
+           <!-- @if (
                 registerForm.controls.contraConfirmada.errors && (
                   registerForm.controls.password.errors || 
                   registerForm.controls.contraConfirmada.errors || 
@@ -47,21 +50,32 @@
                 </small>
               </div>
               
-              }
+              }-->
+              <small *ngIf="registerForm.controls.contraConfirmada.errors && (
+                registerForm.controls.password.errors || 
+                registerForm.controls.contraConfirmada.errors || 
+                registerForm.getError('confirmError')
+              )" class="text-danger"> 
+                Mínimo 8 caracteres, debe incluir al menos una letra mayúscula, una letra minúscula y un número.
+              </small>
           </div>
           <div class="form-floating mb-3">
             <input type="number" class="form-control" id="edad"  placeholder="edad" formControlName="edad">
             <label for="edad">edad</label>
-            @if (
+          <!--  @if (
               registerForm.controls.edad.touched && 
-              registerForm.controls.edad.errors?.required) {
+              registerForm.controls.edad.errors?.['required']) {
               <small class="text-danger">La edad es obligatoria.</small>           
             }
             @if (
               registerForm.controls.edad.touched && 
-              registerForm.controls.edad.errors?.pattern) {
+              registerForm.controls.edad.errors?.['pattern']) {
               <small class="text-danger">La edad debe ser un número entre 18 y 60..</small>           
-            }
+            }-->
+            <small *ngIf="registerForm.controls.edad.touched && 
+            registerForm.controls.edad.errors?.required"  class="text-danger">La edad es obligatoria.</small> 
+            <small *ngIf="registerForm.controls.edad.touched && 
+            registerForm.controls.edad.errors?.pattern" class="text-danger">La edad debe ser un número entre 18 y 60..</small> 
           </div>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" formControlName="contraseña">
@@ -111,9 +125,18 @@
           <div class="form-floating mb-3">
             <input type="datetime-local" class="form-control" id="fechaNacimiento"  placeholder="fechaNacimiento" formControlName="fechaNacimiento">
             <label for="fechaNacimiento">fechaNacimiento</label>
+           <!-- 
+            @if (registerForm.controls.fechaNacimiento.touched && registerForm.controls.fechaNacimiento.errors) {
+              @if (registerForm.controls.fechaNacimiento.errors['required']) {
+                <small class="text-danger">Fecha de nacimiento es obligatorio.</small>
+              }
+            }
+          -->
+          <small *ngIf="registerForm.controls.fechaNacimiento.touched && registerForm.controls.fechaNacimiento.errors?.required"  class="text-danger">Fecha de nacimiento es obligatorio.</small>
           </div>
-
-          <button type="button" class="btn btn-primary">Primary</button>
+          <div><button type="button" class="btn btn-primary" [disabled]="registerForm.invalid">Registrar</button>
+          </div>
+          
         </form>  
       </div>
     </div>

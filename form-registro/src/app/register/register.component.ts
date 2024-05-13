@@ -22,13 +22,8 @@ export class RegisterComponent {
       contraConfirmada: new FormControl('',[Validators.required, Validators.minLength(8),Validators.maxLength(30)]),
       edad: new FormControl(null , [
         Validators.required, 
-        Validators.pattern('(1[8-9]|[2-5][0-9]|60)'),
-      (control: AbstractControl) =>{
-        const edad = control.value;
-        if(edad < 18){
-          return { menorDeEdad: true };
-        }
-      }
+        Validators.pattern('(1[8-9]|[2-5][0-9]|60)'),this.mayorDe18
+      
     ]),
       genero:new FormControl(''),
       suscripcion: new FormControl('Noticias'),
@@ -36,9 +31,16 @@ export class RegisterComponent {
       fechaNacimiento: new FormControl(new Date()),
     },
     { validators: this.contraConfirmadaValidator}
+    
   );
 
-  
+  mayorDe18(control: AbstractControl){
+    const edad = control.value
+    if(edad < 18){
+      return {invalid: true};
+    }
+    return null;
+  }
   contraConfirmadaValidator(control: AbstractControl){
   
       if(control.get('password')?.value === control.get('contraConfirmada')?.value){
