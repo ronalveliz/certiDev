@@ -134,7 +134,7 @@
           -->
           <small *ngIf="registerForm.controls.fechaNacimiento.touched && registerForm.controls.fechaNacimiento.errors?.required"  class="text-danger">Fecha de nacimiento es obligatorio.</small>
           </div>
-          <div><button type="button" class="btn btn-primary" [disabled]="registerForm.invalid">Registrar</button>
+          <div><button type="button" class="btn btn-primary" [disabled]="registerForm.invalid" (onSubmit)="onSubmit()">Registrar</button>
           </div>
           
         </form>  

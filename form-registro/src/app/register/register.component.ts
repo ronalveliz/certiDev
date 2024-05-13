@@ -33,7 +33,9 @@ export class RegisterComponent {
     { validators: this.contraConfirmadaValidator}
     
   );
+ 
 
+  
   mayorDe18(control: AbstractControl){
     const edad = control.value
     if(edad < 18){
@@ -43,7 +45,7 @@ export class RegisterComponent {
   }
   contraConfirmadaValidator(control: AbstractControl){
   
-      if(control.get('password')?.value === control.get('contraConfirmada')?.value){
+    if(control.get('password')?.value === control.get('contraConfirmada')?.value){
       return null;
   
       }else{
@@ -51,9 +53,24 @@ export class RegisterComponent {
           'confirmError': true
         }
       }
+  }
+
+  
+  onSubmit() {
+    if (this.registerForm.valid) {
+      console.log('Registro exitoso');
+      
     }
-     
-     save(){
+  } 
+    save(){
       const register: USUARIO = this.registerForm.value as unknown as USUARIO;
-     }
-}
+     
+    }
+}  
+
+
+
+
+
+  
+
