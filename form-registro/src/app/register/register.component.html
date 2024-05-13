@@ -1,0 +1,121 @@
+<div class="container ">
+    <div class="row">           
+      <div class="col">
+        <form [formGroup]="registerForm" (ngSubmit)="save()">
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="nombreCompleto"  placeholder="nombreCompleto" formControlName="nombreCompleto">
+            <label for="nombreCompleto">nombreCompleto</label>
+            @if (registerForm.controls.nombreCompleto.touched && registerForm.controls.nombreCompleto.errors) {
+              <div>
+                <small class="text-danger"> el nombre Debe tener al menos 5 caracteres</small>
+              </div>
+            }
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="correo" placeholder="name@example.com" formControlName="correo">
+            <label for="correo">correo</label>
+            @if (
+              registerForm.controls.correo.touched && registerForm.controls.correo.errors) {
+                <div>
+                  @if (registerForm.controls.correo.errors['required']) {
+                    <small class="text-danger">Email es obligatorio.</small>
+                  }
+                  @if (registerForm.controls.correo.errors['email']) {
+                    <small class="text-danger">El formato del email introducido es incorrecto.</small>
+                  }
+                </div>
+              }
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password"  placeholder="password" formControlName="password">
+            <label for="password">password</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="contraConfirmada"  placeholder="password" formControlName="contraConfirmada">
+            <label for="contraConfirmada">password</label>
+            @if (
+                registerForm.controls.contraConfirmada.errors && (
+                  registerForm.controls.password.errors || 
+                  registerForm.controls.contraConfirmada.errors || 
+                  registerForm.getError('confirmError')
+                ))
+              {
+              <div>
+                <small class="text-danger"> 
+                  Mínimo 8 caracteres, debe incluir al menos una letra mayúscula, una letra minúscula y un número.
+                </small>
+              </div>
+              
+              }
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="edad"  placeholder="edad" formControlName="edad">
+            <label for="edad">edad</label>
+            @if (
+              registerForm.controls.edad.touched && 
+              registerForm.controls.edad.errors?.required) {
+              <small class="text-danger">La edad es obligatoria.</small>           
+            }
+            @if (
+              registerForm.controls.edad.touched && 
+              registerForm.controls.edad.errors?.pattern) {
+              <small class="text-danger">La edad debe ser un número entre 18 y 60..</small>           
+            }
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" formControlName="contraseña">
+            <label class="form-check-label" for="flexRadioDefault1">
+              masculino
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked  formControlName="contraseña">
+            <label class="form-check-label" for="flexRadioDefault2">
+              femenino
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked  formControlName="contraseña">
+            <label class="form-check-label" for="flexRadioDefault2">
+              otro
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Noticias
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              Promociones
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              Actualizaciones de Producto
+            </label>
+          </div>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>País de residencia:</option>
+            <option value="1">Peru</option>
+            <option value="2">Japon</option>
+            <option value="3">Chile</option>
+            <option value="4">Argentina</option>
+            <option value="5">España</option>
+          </select>
+
+          <div class="form-floating mb-3">
+            <input type="datetime-local" class="form-control" id="fechaNacimiento"  placeholder="fechaNacimiento" formControlName="fechaNacimiento">
+            <label for="fechaNacimiento">fechaNacimiento</label>
+          </div>
+
+          <button type="button" class="btn btn-primary">Primary</button>
+        </form>  
+      </div>
+    </div>
+  </div>
+
